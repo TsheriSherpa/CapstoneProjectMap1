@@ -38,7 +38,9 @@ Welcome to RoomHub, a React Native Expo app designed for convenient room rentals
 
 2. Navigate to the project folder
 3. Install dependencies:
-    npm install
+   ```bash
+   npm install
 
-4. Start the Expo development server:
+5. Start the Expo development server:
+   ```bash
     npm start
