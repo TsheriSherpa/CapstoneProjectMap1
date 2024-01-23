@@ -9,6 +9,7 @@ Welcome to RoomHub, a React Native Expo app designed for convenient room rentals
 
 ## Collaborators
 - Chiree Sherpa
+- Prayud Gurung
 
 ## Features
 
@@ -16,7 +17,11 @@ Welcome to RoomHub, a React Native Expo app designed for convenient room rentals
 - User can search rooms by location
 - User can filter/sort rooms by price, date posted
 - User can add rooms to watch list
-
+- User can post room to rent
+- Users can leave review
+- User can view room location on map
+- User can give and view rating of lenders
+- User can message directly to the lender
 
 
 ## Technologies Used
