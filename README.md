@@ -1,2 +1,39 @@
-# CapstoneProjectMap1
-Group effort on our postgrad capstone project in mobile app development. 🚀 Crafting a modern, user-centric app showcasing innovation and collaborative skills. Stay tuned for cutting-edge tech and an engaging user experience
+# RoomHub: React Native Expo Room Rental App
+
+App Name: Room Hub
+Group Name: Group 20
+
+## Description
+
+Welcome to RoomHub, a React Native Expo app designed for convenient room rentals. This capstone project is a collaborative effort by Chiree Sherpa and Prayud Gurung as part of our postgraduate mobile application development course.
+
+## Collaborators
+- Chiree Sherpa
+
+## Features
+
+- User can view all available rooms
+- User can search rooms by location
+- User can filter/sort rooms by price, date posted
+- User can add rooms to watch list
+
+
+
+## Technologies Used
+
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [Firebase](https://firebase.google.com/)
+
+## How to Run the App
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/room-rover-app.git
+
+2. Navigate to the project folder
+3. Install dependencies:
+    npm install
+
+4. Start the Expo development server:
+    npm start
