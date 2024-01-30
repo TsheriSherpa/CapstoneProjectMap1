@@ -1,11 +1,11 @@
 # RoomHub: React Native Expo Room Rental App
 
-App Name: Room Hub
+App Name: Movie Hub
 Group Name: Group 20
 
 ## Description
 
-Welcome to RoomHub, a React Native Expo app designed for convenient room rentals. This capstone project is a collaborative effort by Chiree Sherpa and Prayud Gurung as part of our postgraduate mobile application development course.
+Welcome to Movie Hub, a React Native Expo app designed for exploring movies. This capstone project is a collaborative effort by Chiree Sherpa and Prayud Gurung as part of our postgraduate mobile application development course.
 
 ## Collaborators
 - Chiree Sherpa
@@ -13,16 +13,15 @@ Welcome to RoomHub, a React Native Expo app designed for convenient room rentals
 
 ## Features
 
-- User can view all available rooms
-- User can search rooms by location
-- User can filter/sort rooms by price, date posted
-- User can add rooms to watch list
-- User can post room to rent
-- Users can leave review
-- User can view room location on map
-- User can give and view rating of lenders
-- User can message directly to the lender
-
+- User can view movies listing
+- User can view the detail of the movie
+- User can search movie by movie name
+- User can add movies to favourites
+- User can view the details of the casts
+- User can get similar movies suggestions
+- User can add casts to favourites
+- User can view rating of the movie
+- User can view trailer of the movie
 
 ## Technologies Used
 
