@@ -1,4 +1,4 @@
-# RoomHub: React Native Expo Room Rental App
+# MovieHub: React Native Expo Movie Explore App
 
 App Name: Movie Hub
 Group Name: Group 20
