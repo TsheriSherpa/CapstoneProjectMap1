@@ -2,10 +2,12 @@ import { View, Text, ScrollView, TouchableOpacity, Dimensions, Platform, Image }
 import React, { useEffect, useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeftIcon } from 'react-native-heroicons/outline'
-import { styles } from '../theme'
+import { ChevronLeftIcon, HeartIcon } from 'react-native-heroicons/solid'
+import { styles, theme } from '../theme'
 import Loading from '../components/Loading'
 import { LinearGradient } from "expo-linear-gradient"
+import { useDispatch, useSelector } from 'react-redux'
+import { selectIsFavourite, toggleFavorite } from '../redux/reducers/favoriteSlice'
 import { fallbackMoviePoster, fetchMovieDetails, fetchSimilarMovies, image500 } from '../../api/moviesdb'
 import MovieList from '../components/MovieList'
 
@@ -37,6 +39,13 @@ export default function MovieScreen() {
         setLoading(false)
     }
 
+    const dispatch = useDispatch()
+    let favorite = useSelector((state) => selectIsFavourite(state, item.id))
+
+    const handleFavoriteToggle = (id) => {
+        dispatch(toggleFavorite(id))
+    }
+
     return (
         <ScrollView
             contentContainerStyle={{ paddingBottom: 20 }}
@@ -48,6 +57,9 @@ export default function MovieScreen() {
                     <TouchableOpacity style={styles.background} className="rounded-xl p-1" onPress={() => navigation.goBack()}>
                         <ChevronLeftIcon size={28} strokeWidth={2.5} color={"white"} />
 
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleFavoriteToggle(item.id)}>
+                        <HeartIcon size={35} color={favorite ? theme.background : "white"} />
                     </TouchableOpacity>
 
                 </SafeAreaView>
