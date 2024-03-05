@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import favoriteReducer from './favoriteSlice';
 
 const rootReducer = combineReducers({ 
-    favorites: favoriteReducer,
+    favorite: favoriteReducer
 });
 
 export default rootReducer
