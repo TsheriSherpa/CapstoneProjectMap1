@@ -6,9 +6,10 @@ import { ChevronLeftIcon, HeartIcon } from 'react-native-heroicons/solid'
 import { styles, theme } from '../theme'
 import Loading from '../components/Loading'
 import { LinearGradient } from "expo-linear-gradient"
-import { fallbackMoviePoster, fetchMovieDetails, image500 } from '../../api/moviesdb'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectIsFavourite, toggleFavorite } from '../redux/reducers/favoriteSlice'
+import { fallbackMoviePoster, fetchMovieDetails, fetchSimilarMovies, image500 } from '../../api/moviesdb'
+import MovieList from '../components/MovieList'
 
 let { width, height } = Dimensions.get('window')
 const ios = Platform.OS == "ios"
@@ -18,15 +19,23 @@ export default function MovieScreen() {
     const { params: item } = useRoute()
     const [loading, setLoading] = useState(false)
     const [movie, setMovie] = useState({})
+
+    const [similarMovies, setSimilarMovies] = useState([])
     const navigation = useNavigation()
 
     useEffect(() => {
         getMovieDetails(item.id)
+        getSimilarMovies(item.id)
     }, [item])
 
     const getMovieDetails = async id => {
         const data = await fetchMovieDetails(id)
         if (data) setMovie(data)
+        setLoading(false)
+    }
+    const getSimilarMovies = async id => {
+        const data = await fetchSimilarMovies(id)
+        if (data && data.results) setSimilarMovies(data.results)
         setLoading(false)
     }
 
@@ -99,11 +108,11 @@ export default function MovieScreen() {
                 {/* genres  */}
                 <View className="flex-row justify-center mx-4 space-x-2">
                     {
-                        movie?.genres?.map((genre,index)=>{
-                            let showDot = index+1 != movie.genres.length;
+                        movie?.genres?.map((genre, index) => {
+                            let showDot = index + 1 != movie.genres.length;
                             return (
                                 <Text key={index} className="text-neutral-400 font-semibold text-base text-center">
-                                    {genre?.name} {showDot? "•":null}
+                                    {genre?.name} {showDot ? "•" : null}
                                 </Text>
                             )
                         })
@@ -118,6 +127,9 @@ export default function MovieScreen() {
                 </Text>
 
             </View>
+
+            {/*similar movies */}
+            {similarMovies.length > 0 && <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} />}
 
         </ScrollView>
     )
