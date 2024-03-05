@@ -63,17 +63,21 @@ export default function SearchScreen() {
                                 {
                                     results.map((item, index) => {
                                         return (
-                                            <View key={index}>
-                                                <Image
-                                                    source={{ uri: image185(item.poster_path) || fallbackMoviePoster }}
-                                                    className="rounded-3xl"
-                                                    style={{ width: width * 0.44, height: height * 0.3 }} />
-                                                <Text className="text-gray-300 ml-1">
-                                                    {
-                                                        item?.title.length > 20 ? item?.title.slice(0, 20) + '...' : item?.title
-                                                    }
-                                                </Text>
-                                            </View>
+                                            <TouchableWithoutFeedback
+                                                key={index}
+                                                onPress={() => navigation.push('Movie', item)}>
+                                                <View className="space-y-2 mb-4">
+                                                    <Image
+                                                        source={{ uri: image185(item.poster_path) || fallbackMoviePoster }}
+                                                        className="rounded-3xl"
+                                                        style={{ width: width * 0.44, height: height * 0.3 }} />
+                                                    <Text className="text-gray-300 ml-1">
+                                                        {
+                                                            item?.title.length > 20 ? item?.title.slice(0, 20) + '...' : item?.title
+                                                        }
+                                                    </Text>
+                                                </View>
+                                            </TouchableWithoutFeedback>
                                         )
                                     })
                                 }
