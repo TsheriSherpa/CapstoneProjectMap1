@@ -33,10 +33,10 @@ export default function TrendingMovies({ data }) {
 
 const MovieCard = ({ item, handleClick }) => {
 	const dispatch = useDispatch()
-	let favorite = useSelector((state) => selectIsFavourite(state, item.id))
+	let favorite = useSelector((state) => selectIsFavourite(state, item))
 
-	const handleFavoriteToggle = (id) => {
-		dispatch(toggleFavorite(id))
+	const handleFavoriteToggle = (item) => {
+		dispatch(toggleFavorite(item))
 	}
 
 	return (
@@ -52,7 +52,7 @@ const MovieCard = ({ item, handleClick }) => {
 					className="rounded-3xl"
 				/>
 				<View style={{ position: 'absolute', top: 10, right: 10 }}>
-					<TouchableWithoutFeedback onPress={() => handleFavoriteToggle(item.id)}>
+					<TouchableWithoutFeedback onPress={() => handleFavoriteToggle(item)}>
 						<HeartIcon size={28} strokeWidth={2.5} color={favorite ? "red" : "white"} />
 					</TouchableWithoutFeedback>
 				</View>
