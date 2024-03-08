@@ -13,10 +13,10 @@ export const Movie = ({item, index}) => {
     const navigation = useNavigation()
 
     const dispatch = useDispatch()
-    let favorite = useSelector((state) => selectIsFavourite(state, item.id))
+    let favorite = useSelector((state) => selectIsFavourite(state, item))
 
-    const handleFavoriteToggle = (id) => {
-        dispatch(toggleFavorite(id))
+    const handleFavoriteToggle = (item) => {
+        dispatch(toggleFavorite(item))
     }
 
     return (
@@ -36,7 +36,7 @@ export const Movie = ({item, index}) => {
                 </Text>
 
                 <View style={{ position: 'absolute', top: -5, right: 5 }}>
-                    <TouchableWithoutFeedback onPress={() => handleFavoriteToggle(item.id)}>
+                    <TouchableWithoutFeedback onPress={() => handleFavoriteToggle(item)}>
                         <HeartIcon size={28} strokeWidth={2.5} color={favorite ? "red" : "white"} />
                     </TouchableWithoutFeedback>
                 </View>

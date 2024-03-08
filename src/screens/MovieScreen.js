@@ -31,10 +31,10 @@ export default function MovieScreen() {
     }
 
     const dispatch = useDispatch()
-    let favorite = useSelector((state) => selectIsFavourite(state, item.id))
+    let favorite = useSelector((state) => selectIsFavourite(state, item))
 
-    const handleFavoriteToggle = (id) => {
-        dispatch(toggleFavorite(id))
+    const handleFavoriteToggle = (item) => {
+        dispatch(toggleFavorite(item))
     }
 
     return (
@@ -49,7 +49,7 @@ export default function MovieScreen() {
                         <ChevronLeftIcon size={28} strokeWidth={2.5} color={"white"} />
 
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleFavoriteToggle(item.id)}>
+                    <TouchableOpacity onPress={() => handleFavoriteToggle(item)}>
                         <HeartIcon size={35} color={favorite ? theme.background : "white"} />
                     </TouchableOpacity>
 
