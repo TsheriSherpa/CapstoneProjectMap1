@@ -16,39 +16,39 @@ const HomeScreen = () => {
 
     const navigation = useNavigation()
 
-     //making api call to fetch movies only once
-     useEffect(()=>{
+    //making api call to fetch movies only once
+    useEffect(() => {
         getTrendingMovies()
         getUpcomingMovies()
         getTopRatedMovies()
-     },[])
+    }, [])
 
 
     //  getting trending movies
-    const getTrendingMovies=async()=>{
+    const getTrendingMovies = async () => {
         const data = await fetchTrendingMovies()
         // console.log("got trending movies : ",data);.
-        if(data && data.results) setTrending(data.results)
+        if (data && data.results) setTrending(data.results)
         setLoading(false)
     }
 
     //  getting upcoming movies
-    const getUpcomingMovies=async()=>{
+    const getUpcomingMovies = async () => {
         const data = await fetchUpcomingMovies()
-        if(data && data.results) setUpcoming(data.results)
+        if (data && data.results) setUpcoming(data.results)
         setLoading(false)
     }
 
     //  getting top rated movies
-    const getTopRatedMovies=async()=>{
+    const getTopRatedMovies = async () => {
         const data = await fetchTrendingMovies()
-        if(data && data.results) setTopRated(data.results)
+        if (data && data.results) setTopRated(data.results)
         setLoading(false)
     }
-     
+
     return (
         <View className="flex-1 bg-neutral-800">
-            <ActionBar navigation={navigation}/>
+            <ActionBar navigation={navigation} />
             {
                 loading ? <Loading /> : (
                     <ScrollView
@@ -56,7 +56,7 @@ const HomeScreen = () => {
                         contentContainerStyle={{ paddingBottom: 10 }}>
 
                         {/* trending movies corousel */}
-                        {trending.length>0 && <TrendingMovies data={trending} />}
+                        {trending.length > 0 && <TrendingMovies data={trending} />}
 
                         {/* upcoming movies row */}
                         <MovieList title="Upcoming" data={upcoming} />
