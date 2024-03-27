@@ -2,7 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity, Dimensions, Platform, Image }
 import React, { useEffect, useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeftIcon, HeartIcon } from 'react-native-heroicons/solid'
+import { ChevronLeftIcon, HeartIcon, StarIcon } from 'react-native-heroicons/solid'
 import { styles, theme } from '../theme'
 import Loading from '../components/Loading'
 import { LinearGradient } from "expo-linear-gradient"
@@ -116,6 +116,19 @@ export default function MovieScreen() {
                     ) : null
                 }
 
+                { /*Rating*/}
+                {
+                    movie?.id ? (
+
+                            <Text className="text-neutral-400 text-xl font-semibold text-center">
+
+                            <StarIcon size={25} color={"gold"}/>
+                                {parseFloat(movie?.vote_average).toFixed(2)}
+                            </Text>
+
+                    ) : null
+                }
+
                 {/* genres  */}
                 <View className="flex-row justify-center mx-4 space-x-2">
                     {
@@ -141,7 +154,7 @@ export default function MovieScreen() {
 
 
             {/* cast member */}
-            {cast.length>0 &&<Cast navigation={navigation} cast={cast} />}
+            {cast.length > 0 && <Cast navigation={navigation} cast={cast} />}
 
 
             {/*similar movies */}
