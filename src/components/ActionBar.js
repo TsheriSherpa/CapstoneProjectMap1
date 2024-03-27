@@ -2,7 +2,7 @@ import { View, Text, Platform, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "../theme/index"
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline"
+import { Bars3CenterLeftIcon, MagnifyingGlassIcon, HeartIcon } from "react-native-heroicons/outline"
 
 const ios = Platform.OS == "ios"
 
@@ -17,9 +17,15 @@ export const ActionBar = ({navigation}) => {
                     <Text style={styles.text}>M</Text>ovies
                 </Text>
 
-                <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-                    <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
-                </TouchableOpacity>
+                <View className="flex flex-row justify-between" style={{width: 80 }}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Favourite")}>
+                        <HeartIcon size={30} strokeWidth={2} color="white" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+                        <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
+                    </TouchableOpacity>
+                </View>
 
             </View>
         </SafeAreaView>

@@ -8,8 +8,9 @@ import Loading from '../components/Loading'
 import { LinearGradient } from "expo-linear-gradient"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectIsFavourite, toggleFavorite } from '../redux/reducers/favoriteSlice'
-import { fallbackMoviePoster, fetchMovieDetails, fetchSimilarMovies, image500 } from '../../api/moviesdb'
+import { fallbackMoviePoster, fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies, image500 } from '../../api/moviesdb'
 import MovieList from '../components/MovieList'
+import Cast from '../components/Cast'
 
 let { width, height } = Dimensions.get('window')
 const ios = Platform.OS == "ios"
@@ -23,8 +24,11 @@ export default function MovieScreen() {
     const [similarMovies, setSimilarMovies] = useState([])
     const navigation = useNavigation()
 
+    const [cast, setCast] = useState([])
+
     useEffect(() => {
         getMovieDetails(item.id)
+        getMovieCredits(item.id)
         getSimilarMovies(item.id)
     }, [item])
 
@@ -33,6 +37,13 @@ export default function MovieScreen() {
         if (data) setMovie(data)
         setLoading(false)
     }
+
+    const getMovieCredits = async id => {
+        const data = await fetchMovieCredits(id)
+        if (data && data.cast) setCast(data.cast)
+        setLoading(false)
+    }
+
     const getSimilarMovies = async id => {
         const data = await fetchSimilarMovies(id)
         if (data && data.results) setSimilarMovies(data.results)
@@ -127,6 +138,11 @@ export default function MovieScreen() {
                 </Text>
 
             </View>
+
+
+            {/* cast member */}
+            {cast.length>0 &&<Cast navigation={navigation} cast={cast} />}
+
 
             {/*similar movies */}
             {similarMovies.length > 0 && <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} />}
