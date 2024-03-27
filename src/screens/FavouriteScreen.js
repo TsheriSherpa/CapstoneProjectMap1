@@ -7,7 +7,8 @@ import {
     Dimensions, 
     TouchableOpacity, 
     ScrollView, 
-    TouchableWithoutFeedback 
+    Image,
+    TouchableWithoutFeedback,
 } from 'react-native'
 import { ArrowLeftIcon } from "react-native-heroicons/outline"
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -50,7 +51,11 @@ export default function FavouriteScreen() {
                         }
                     </View>
                 ) : (
-                    <Text>No Favourites</Text>
+                    <View className="flex-col justify-center items-center">
+                        <Image
+                            source={require('../assets/images/noMovie.png')}
+                            className="h-96 w-96" />
+                    </View>
                 )}
             </ScrollView>
         </SafeAreaView>
