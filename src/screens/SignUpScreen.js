@@ -47,6 +47,7 @@ export default function SignUpScreen() {
                     lastName: lastName,
                     email: email
                 });
+                navigation.navigate("Login")
             })
             .catch((error) => {
                 console.log(error);
