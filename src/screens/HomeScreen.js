@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import Loading from "../components/Loading";
 import { fetchTrendingMovies, fetchUpcomingMovies } from "../../api/moviesdb";
 import { ActionBar } from "../components/ActionBar.js";
+import { StatusBar } from "expo-status-bar";
 
 
 const HomeScreen = () => {
