@@ -112,7 +112,7 @@ export default function SignUpScreen() {
                 <Text className="p-2 ml-5 text-base font-semibold text-red-600 tracking-wider">Password should be at least 6 characters long</Text>
             )}
 
-            <View className="m-10">
+            <View className="m-5 mb-10">
                 <Button title="Sign Up" onPress={handleSignUp} />
             </View>
 

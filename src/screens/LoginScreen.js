@@ -60,7 +60,7 @@ export default function LoginScreen() {
                 </View>
             }
 
-            <View className="mt-5">
+            <View className="m-5 mb-10">
                 <Button title="Login" onPress={handleLogin}/>
             </View>
 
