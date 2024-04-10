@@ -14,7 +14,7 @@ const SideBar = ({ navigation }) => {
     return (
         <View className="flex-1 bg-neutral-800 p-5">
             <View className="bg-orange-800 mt-10 border-y-2 p-5">
-                <TouchableOpacity onPress={() => navigation.navigate("Favorite")}>
+                <TouchableOpacity onPress={() => navigation.navigate("Favourite")}>
                     <Text className="text-white font-semibold text-base">Favorite</Text>
                 </TouchableOpacity>
             </View>
