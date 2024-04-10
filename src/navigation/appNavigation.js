@@ -9,6 +9,7 @@ import SearchScreen from '../screens/SearchScreen';
 import FavouriteScreen from '../screens/FavouriteScreen';
 import PersonScreen from '../screens/PersonScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,7 @@ const AppNavigation = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
 
                 <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
 
