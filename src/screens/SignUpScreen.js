@@ -1,4 +1,4 @@
-import { Text, Dimensions, TextInput, Button, TouchableOpacity } from 'react-native'
+import { Text, View, Dimensions, TextInput, Button, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from '../utilities/firebase';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore/lite';
+import { Ionicons } from '@expo/vector-icons';
 
 let { width, height } = Dimensions.get('window')
 
@@ -16,9 +17,24 @@ export default function SignUpScreen() {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [showPassword, setShowPassword] = useState(false)
+    const [passwordsMatch, setPasswordsMatch] = useState(true)
+    const [emailExists, setEmailExists] = useState(false)
 
     const handleSignUp = async () => {
-        // Add to firebase signupusingEmailPAssword
+
+        if (password.length < 6) {
+            console.log("Password should be at least 6 characters long");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setPasswordsMatch(false);
+            return;
+        }
+
+        setPasswordsMatch(true);
 
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
@@ -26,7 +42,7 @@ export default function SignUpScreen() {
                 console.log("Success");
                 const user = userCredential.user;
 
-                setDoc(doc(db,"users", user.uid),{
+                setDoc(doc(db, "users", user.uid), {
                     firstName: firstName,
                     lastName: lastName,
                     email: email
@@ -34,6 +50,11 @@ export default function SignUpScreen() {
             })
             .catch((error) => {
                 console.log(error);
+                if (error.code === "auth/email-already-in-use") {
+                    setEmailExists(true);
+                } else {
+                    setEmailExists(false);
+                }
             });
     }
 
@@ -59,14 +80,41 @@ export default function SignUpScreen() {
                 placeholder="Email"
                 placeholderTextColor={'black'}
                 className="p-2 m-5 rounded-lg bg-white text-base font-semibold text-black tracking-wider" />
+            
+            {emailExists && (
+                <Text className="p-2 ml-5 text-base font-semibold text-red-600 tracking-wider">Email already exists</Text>
+            )}
+
+            <View>
+                <TextInput
+                    onChangeText={(text) => setPassword(text)}
+                    placeholder="Password"
+                    placeholderTextColor={'black'}
+                    secureTextEntry={!showPassword}
+                    className="p-2 m-5 rounded-lg bg-white text-base font-semibold text-black tracking-wider"
+                />
+                <TouchableOpacity onPress={() => setShowPassword(!showPassword)} className="p-8 absolute right-0">
+                    <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={24} color="black" />
+                </TouchableOpacity>
+            </View>
 
             <TextInput
-                onChangeText={(text) => setPassword(text)}
-                placeholder="Password"
+                onChangeText={(text) => setConfirmPassword(text)}
+                placeholder="Confirm Password"
                 placeholderTextColor={'black'}
-                className="p-2 m-5 rounded-lg bg-white text-base font-semibold text-black tracking-wider" />
+                secureTextEntry={!showPassword}
+                className="p-2 m-5 mb-5 rounded-lg bg-white text-base font-semibold text-black tracking-wider"
+            />
+            {!passwordsMatch &&
+                <Text className="p-2 ml-5 text-base font-semibold text-red-600 tracking-wider">Passwords do not match</Text>
+            }
+            {password.length > 0 && password.length < 6 && (
+                <Text className="p-2 ml-5 text-base font-semibold text-red-600 tracking-wider">Password should be at least 6 characters long</Text>
+            )}
 
-            <Button title="Sign Up" onPress={handleSignUp} />
+            <View className="m-10">
+                <Button title="Sign Up" onPress={handleSignUp} />
+            </View>
 
             {/* OnPress={navigation.navigte("Login")} */}
 
