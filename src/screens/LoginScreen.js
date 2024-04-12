@@ -4,12 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from 'react-redux';
+
+import { login, logout } from '../redux/reducers/authSlice'
+
 
 export default function LoginScreen() {
     const navigation = useNavigation();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const dispatch = useDispatch();
 
     const handleLogin = async () => {
         // Add to firebase signupusingEmailPAssword
@@ -21,8 +26,9 @@ export default function LoginScreen() {
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                dispatch(login({user: userCredential.email}))
                 console.log(userCredential)
-                navigation.navigate('Home')
+                navigation.navigate('AppStack')
             })
             .catch((error) => {
                 console.log(error)

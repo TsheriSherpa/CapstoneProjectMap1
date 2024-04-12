@@ -1,12 +1,17 @@
 import { getAuth } from 'firebase/auth';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/reducers/authSlice';
 
 const SideBar = ({ navigation }) => {
+
+    const dispatch = useDispatch();
 
     const handleLogOut = () => {
         const auth = getAuth()
         auth.signOut()
+        dispatch(logout())
 
         navigation.navigate("Login")
     }
